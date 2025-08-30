@@ -12,7 +12,7 @@ import {
 	BootNotificationReceived,
 	MeterValues,
 } from '@plugind/contracts';
-import { AuthorizeUsecase } from '../usecases/authorize/authorize.usecase';
+import { AuthorizeUsecase } from '../../core/usecases/authorize/authorize.usecase';
 
 @Controller()
 export class KafkaController {
