@@ -1,6 +1,17 @@
 import { Controller } from '@nestjs/common';
-import { Ctx, EventPattern, KafkaContext, Payload } from '@nestjs/microservices';
-import { Topics, Envelope, AuthorizeRequest, BootNotificationReceived, MeterValues } from '@plugind/contracts';
+import {
+	Ctx,
+	EventPattern,
+	KafkaContext,
+	Payload,
+} from '@nestjs/microservices';
+import {
+	Topics,
+	Envelope,
+	AuthorizeRequest,
+	BootNotificationReceived,
+	MeterValues,
+} from '@plugind/contracts';
 import { AuthorizeUsecase } from '../usecases/authorize/authorize.usecase';
 
 @Controller()
@@ -12,6 +23,9 @@ export class KafkaController {
 		@Payload() envelope: Envelope<AuthorizeRequest>,
 		@Ctx() context: KafkaContext,
 	) {
+		console.log(
+			`${KafkaController.name} - ${this.onAuthorizeRequest.name} Harusnya ini ke hit`,
+		);
 		await this.authorizeUsecase.execute(envelope);
 	}
 
@@ -20,6 +34,9 @@ export class KafkaController {
 		@Payload() envelope: Envelope<BootNotificationReceived>,
 		@Ctx() context: KafkaContext,
 	) {
+		console.log(
+			`${KafkaController.name} - ${this.onBootNotification.name} Harusnya ini ke hit`,
+		);
 		// For demo purposes, just log or extend with a dedicated usecase later
 		// eslint-disable-next-line no-console
 		console.log('BootNotification received:', envelope);
