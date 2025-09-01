@@ -1,4 +1,5 @@
 import { Controller } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import {
 	Ctx,
 	EventPattern,
@@ -15,8 +16,11 @@ import {
 import { AuthorizeUsecase } from '../../core/usecases/authorize/authorize.usecase';
 
 @Controller()
-export class KafkaController {
-	constructor(private readonly authorizeUsecase: AuthorizeUsecase) {}
+export class KafkaConsumerController {
+	constructor(
+		private readonly authorizeUsecase: AuthorizeUsecase,
+		private readonly confidService: ConfigService,
+	) {}
 
 	@EventPattern(Topics.AuthorizeRequest)
 	async onAuthorizeRequest(
@@ -24,7 +28,7 @@ export class KafkaController {
 		@Ctx() context: KafkaContext,
 	) {
 		console.log(
-			`${KafkaController.name} - ${this.onAuthorizeRequest.name} Harusnya ini ke hit`,
+			`${KafkaConsumerController.name} - ${this.onAuthorizeRequest.name} Harusnya ini ke hit`,
 		);
 		await this.authorizeUsecase.execute(envelope);
 	}
@@ -35,7 +39,7 @@ export class KafkaController {
 		@Ctx() context: KafkaContext,
 	) {
 		console.log(
-			`${KafkaController.name} - ${this.onBootNotification.name} Harusnya ini ke hit`,
+			`${KafkaConsumerController.name} - ${this.onBootNotification.name} Harusnya ini ke hit`,
 		);
 		// For demo purposes, just log or extend with a dedicated usecase later
 		// eslint-disable-next-line no-console

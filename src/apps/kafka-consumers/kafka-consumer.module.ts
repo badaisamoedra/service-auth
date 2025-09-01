@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { KafkaController } from './kafka.controller';
+import { KafkaConsumerController } from './kafka-consumer.controller';
 import { UsecasesModule } from '../../core/usecases/usecases.module';
 
 @Module({
 	imports: [UsecasesModule],
-	controllers: [KafkaController],
+	controllers: [KafkaConsumerController],
 })
-export class AdaptersModule {}
+export class KafkaConsumerModule {}

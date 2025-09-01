@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AuthorizeUsecase } from './authorize/authorize.usecase';
-import { KafkaModule } from '../../infrastructure/messaging/kafka/kafka.module';
+import { KafkaProducerModule } from '../../infrastructure/messaging/kafka-producer/kafka.producer.module';
 
 @Module({
-	imports: [KafkaModule],
+	imports: [KafkaProducerModule],
 	providers: [AuthorizeUsecase],
 	exports: [AuthorizeUsecase],
 })

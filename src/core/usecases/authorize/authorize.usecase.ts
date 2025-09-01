@@ -5,7 +5,7 @@ import {
 	AuthorizeResult,
 	Topics,
 } from '@plugind/contracts';
-import { KafkaProducerService } from '../../../infrastructure/messaging/kafka/kafka.producer.service';
+import { KafkaProducerService } from '../../../infrastructure/messaging/kafka-producer/kafka.producer.service';
 
 @Injectable()
 export class AuthorizeUsecase {
